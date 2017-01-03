@@ -1,28 +1,14 @@
-<!Doctype html>
-    <html>
-        <head>
-            <title>Математический Блог</title>
-        </head>
-        <body>
-            <h1>
-                Математический Блог
-            </h1>
-            <p>
-                Добро пожаловать на сайт, посвященный математике, физике,<br>
-                и новостям науки.
-            </p>
-            <div>
-                <h2><ins>Меню</ins></h2>
-                <a href = >Новости</a><br>
-                <a href = >Математическая игра</a><br>
-                <a href = >Регистрация</a>
-            </div>
-            {% for post in posts %}
-                <div>
-                    <p>published: {{ post.published_date }}</p>
-                    <h1><a href="">{{ post.title }}</a></h1>
-                    <p>{{ post.text|linebreaksbr }}</p>
+    {% extends 'blog/base.html' %}
+
+    {% block content %}
+        {% for post in posts %}
+            <div class="post">
+                <div class="date">
+                    {{ post.published_date }}
                 </div>
-            {% endfor %}
-        </body>
-    </html>
+                <!--<h1><a href="">{{ post.title }}</a></h1>-->
+                <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+                <p>{{ post.text|linebreaksbr }}</p>
+            </div>
+        {% endfor %}
+    {% endblock content %}
